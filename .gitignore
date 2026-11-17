@@ -1,0 +1,6 @@
+build/
+dist/
+*.spec
+__pycache__/
+wallclock.json
+错误日志.txt
