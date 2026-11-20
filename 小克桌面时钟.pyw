@@ -45,8 +45,9 @@ OUT_DIR = os.path.join(HERE, "cache")
 STATE_PATH = os.path.join(OUT_DIR, "原壁纸记录.json")
 APP_NAME = "小克桌面时钟"
 APP_NAME_EN = "Claude Desktop Clock"
+VERSION = "1.3.2"
 CREDITS = "设计：Arqiu-owo · 代码：Claude · 图标：豆包"
-ABOUT_TEXT = (f"{APP_NAME}  ·  {APP_NAME_EN}\n\n"
+ABOUT_TEXT = (f"{APP_NAME} v{VERSION}  ·  {APP_NAME_EN}\n\n"
               "免费、高度可配置、极低性能开销的桌面时钟~\n\n"
               "设计：Arqiu-owo\n"
               "代码：Claude\n"
@@ -1038,7 +1039,7 @@ class Tray:
     def menu(self):
         cfg = self.clock.cfg
         self.popup.show([
-            ("title", APP_NAME),
+            ("title", f"{APP_NAME} v{VERSION}"),
             ("sep",),
             ("item", MENU_SETTINGS, "设置…", False, True),
             ("sep",),
@@ -2108,7 +2109,7 @@ class SettingsApp:
         ttk.Button(box, text="打开所在文件夹", style="Pill.TButton", command=lambda: os.startfile(HERE)).pack(
             side="left", padx=(P(8), 0))
         r = self.row(f, "关于")
-        ttk.Label(r, text=f"{APP_NAME} · {APP_NAME_EN}", style="Title.TLabel").grid(
+        ttk.Label(r, text=f"{APP_NAME} v{VERSION} · {APP_NAME_EN}", style="Title.TLabel").grid(
             row=0, column=1, columnspan=3, sticky="w")
         for i, text in enumerate(("免费、高度可配置、极低性能开销的桌面时钟~", CREDITS), 1):
             ttk.Label(r, text=text, style="Sub.TLabel").grid(row=i, column=1, columnspan=3, sticky="w",
