@@ -45,7 +45,7 @@ OUT_DIR = os.path.join(HERE, "cache")
 STATE_PATH = os.path.join(OUT_DIR, "原壁纸记录.json")
 APP_NAME = "小克桌面时钟"
 APP_NAME_EN = "Claude Desktop Clock"
-VERSION = "1.3.2"
+VERSION = "1.3.3"
 CREDITS = "设计：Arqiu-owo · 代码：Claude · 图标：豆包"
 ABOUT_TEXT = (f"{APP_NAME} v{VERSION}  ·  {APP_NAME_EN}\n\n"
               "免费、高度可配置、极低性能开销的桌面时钟~\n\n"
@@ -174,7 +174,9 @@ def fit_wallpaper(img, w, h):
         else:                                        # 居中
             out.paste(img, ((w - img.width) // 2, (h - img.height) // 2))
         return out
-    return ImageOps.fit(img, (w, h), Image.LANCZOS)  # 填充（默认）/ 跨区
+    # 填充（默认）/ 跨区。Windows 上下裁时不是居中：上面裁 1/3、下面裁 2/3；左右裁才是居中
+    # （2026-11-27 在 Win11 上用 6 种比例的测试图实测）
+    return ImageOps.fit(img, (w, h), Image.LANCZOS, centering=(0.5, 1 / 3))
 
 
 def load_wallpaper(src, w, h):
